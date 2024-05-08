@@ -1,0 +1,63 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% block title %}
+  {% trans 'Email Addresses' %}
+{% endblock %}
+{% block content %}
+  {% element h1 %}
+  {% trans 'Email Addresses' %}
+  {% endelement %}
+  {% if emailaddresses %}
+    <p>
+      {% trans 'The following email addresses are associated with your account:' %}
+    </p>
+    {% url 'account_email' as email_url %}
+    {% element form form=form action=email_url method='post' %}
+    {% slot body %}
+    {% csrf_token %}
+    {% for radio in emailaddress_radios %}
+      {% with emailaddress=radio.emailaddress %}
+        {% element field type='radio' checked=radio.checked name='email' value=emailaddress.email id=radio.id %}
+        {% slot label %}
+        {{ emailaddress.email }}
+        {% if emailaddress.verified %}
+          {% element badge tags='success,email,verified' %}
+          {% translate 'Verified' %}
+          {% endelement %}
+        {% else %}
+          {% element badge tags='warning,email,unverified' %}
+          {% translate 'Unverified' %}
+          {% endelement %}
+        {% endif %}
+        {% if emailaddress.primary %}
+          {% element badge tags='email,primary' %}
+          {% translate 'Primary' %}
+          {% endelement %}
+        {% endif %}
+        {% endslot %}
+        {% endelement %}
+      {% endwith %}
+    {% endfor %}
+    {% endslot %}
+    {% slot actions %}
+    <input value="Make Primary" type="submit" name="action_primary" class="btn btn-primary" />
+    <input value="Verify" type="submit" name="action_send" class="btn btn-success" />
+    <input value="Remove" type="submit" name="action_remove" class="btn btn-danger" />
+    {% endslot %}
+    {% endelement %}
+  {% else %}
+    {% include 'account/snippets/warn_no_email.html' %}
+  {% endif %}
+  {% if can_add_email %}
+    <br />
+    {% element h2 %}
+    {% trans 'Add Email Address' %}
+    {% endelement %}
+    <form method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+      <input type="submit" name="action_add" value="Add Email" class="btn btn-primary" />
+    </form>
+  {% endif %}
+{% endblock %}

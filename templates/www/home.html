@@ -1,0 +1,21 @@
+{% extends 'www/base.html' %}
+
+{% block title %}
+  Home
+{% endblock %}
+
+{% block content %}
+  {% if request.user.is_authenticated %}
+    <h3>Hello, {{ request.user }}</h3>
+    <p>Last Visited Pages:</p>
+    <ul>
+      {% for page in visited_pages %}
+        <li>
+          <a href="{{ page }}">{{ page }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h3>Hello MedGuide visitor</h3>
+  {% endif %}
+{% endblock %}

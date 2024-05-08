@@ -1,0 +1,15 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'New Consent' %}
+{% endblock %}
+{% block content %}
+  <h1>Create New Consent</h1>
+  <p>A base consent that the patient accepts and now you can assign eCRFs to them</p>
+  <form method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Create New Consent" class="btn btn-success" />
+  </form>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'www/base.html' %}
+{% block title %}
+  Doctor Profile
+{% endblock %}
+{% block content %}
+  <h1>{{ doctor_profile.doctor_user }}</h1>
+  {% if user.is_staff and not doctor_profile.doctor_user.verified %}
+    <a href="{% url 'doctor:approve_doctor' profile_id=doctor_profile.id %}" class="btn btn-success float-end">Approve Doctor Profile</a>
+  {% endif %}
+  Hi {{ doctor_profile }}
+{% endblock %}

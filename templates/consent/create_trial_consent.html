@@ -1,0 +1,25 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'Create Trial Consent' %}
+{% endblock %}
+{% block content %}
+    <h1>Create New Trial Consent</h1>
+    <p>A Trial consent that will enrol the Patient in the trial if he/she agrees</p>
+    <p>
+      <small>Base Consent: {{ consent }}</small>
+    </p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <p>{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Send Trial Consent" class="btn btn-primary"/>
+    </form>
+{% endblock %}

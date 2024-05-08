@@ -1,0 +1,18 @@
+{% comment %}The snippet is included in update_patient_profile.html{% endcomment %}
+{% load bootstrap5 %}
+<h4>Concomitant Medications</h4>
+<p>After adding medical conditions, assign medications taken for them. Please skip supplements, only INNs.</p>
+{% for message in messages %}
+  <p>{{ message }}</p>
+{% endfor %}
+{% for medication in concomitant_medications %}
+  <p>Drug: {{ medication }} for {{ medication.medical_condition }}
+    <a href="{% url "patient:delete_concomitant_medication" profile_id=patient_profile.pk medication_id=medication.pk %}">Delete</a>
+  </p>
+{% endfor %}
+
+<form method="POST" action="{% url 'patient:update_concomitant_medication' profile_id=patient_profile.pk %}">
+  {% csrf_token %}
+  {% bootstrap_form concomitant_medication_form %}
+  <input type="submit" value="Add Medication" class="btn btn-primary" />
+</form>

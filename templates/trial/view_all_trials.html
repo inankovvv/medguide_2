@@ -1,0 +1,33 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'All Trials' %}
+{% endblock %}
+{% block content %}
+    <h1>All Available Trials</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover rounded">
+        <caption>All available trials</caption>
+        <thead>
+          <tr>
+            <th scope="col">Trial</th>
+            <th scope="col">Indication</th>
+            <th scope="col">Drug</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for trial in trials %}
+            <tr>
+              <th scope="row">
+                <a href="{% url 'trial:trial' trial_id=trial.id %}">{{ trial }}</a>
+              </th>
+              <td>{{ trial.indication }}</td>
+              <td>{{ trial.drug }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}

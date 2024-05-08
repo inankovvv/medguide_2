@@ -1,0 +1,47 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'Enrolled Patients' %}
+{% endblock %}
+{% block content %}
+    <h1>Enrolled Patients</h1>
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped table-hover rounded">
+        <caption>All the patients that you have enrolled or have initiated consenting</caption>
+        <thead>
+          <tr>
+            <th scope="col">Trial</th>
+            <th scope="col">Patient</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for trial in trial_consents %}
+            <tr>
+              <th scope="row">
+                <a href="{% url 'trial:trial' trial_id=trial.trial.id %}">{{ trial.trial }}</a>
+              </th>
+              <td><a href="{% url "patient:patient_profile" profile_id=trial.consent.patient.PatientProfile.id %}">{{ trial.consent.patient }}</a></td>
+              <td>
+                {% if trial.signed %}
+                  <span class="text-success">Signed</span>
+                {% else %}
+                <span class="text-warning">Pending</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if trial.signed %}
+                  <a href="{% url "ecrf:_ecrf" trial_id=trial.trial.id patient_id=trial.consent.patient.id %}" class="btn btn-success btn-sm">Open eCRF</a>
+                {% else %}
+                  <a href="#" class="btn btn-success btn-sm disabled">Open eCRF</a>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+{% endblock %}

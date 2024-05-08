@@ -1,0 +1,13 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+  Doctor Profile
+{% endblock %}
+{% block content %}
+  <h1>Update Profile</h1>
+  <form method="POST">
+    {% csrf_token %}
+    {% bootstrap_form profile_form %}
+    <input type="submit" value="Update Profile" class="btn btn-primary" />
+  </form>
+{% endblock %}

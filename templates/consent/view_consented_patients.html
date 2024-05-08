@@ -1,0 +1,44 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'View Consented Patients' %}
+{% endblock %}
+{% block content %}
+  <h1>Consented Patients</h1>
+  <div class="alert alert-success">If you want to be able to enroll patients in trials or give them the option to join Patient Support Programs and Groups, please, update their Profile with accurate medical information.</div>
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover rounded">
+      <caption>The patients that you have consented</caption>
+      <thead>
+        <tr>
+          <th scope="col">Patient</th>
+          <th scope="col">Status</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for patient in consented_patients %}
+          <tr>
+            <th scope="row">
+              <a href="{% url "patient:patient_profile" profile_id=patient.patient.PatientProfile.id %}">{{ patient.patient }}</a>
+            </th>
+            <td>
+                {% if patient.patient.PatientProfile.updated %}
+                    <span class="text-success">Verified</span>
+                {% else %}
+                    <span class="text-success">Not verified</span>
+                {% endif %}
+            </td>
+            <td>
+                <a href="{% url "patient:update_patient_profile" profile_id=patient.patient.PatientProfile.id %}" class="btn btn-success btn-sm">
+                    Update Profile
+                </a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

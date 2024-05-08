@@ -1,0 +1,16 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+  Account Login
+{% endblock %}
+{% block content %}
+  <h1>Login</h1>
+  <p>If you have not created an account yet, then please <a href="{% url 'account_signup' %}">Sign up</a> first.</p>
+  <form method="post">
+    {% csrf_token %}
+
+    {% bootstrap_form form %}
+
+    <button type="submit" class="btn btn-primary mb-3">Login</button>
+  </form>
+{% endblock %}

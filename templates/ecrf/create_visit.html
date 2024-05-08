@@ -1,0 +1,17 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'Patient eCRF' %}
+{% endblock %}
+{% block content %}
+    <h1>Create New Visit</h1>
+    <p>Creating a new visit will allow you to add the exams and lab results you performed on the patient</p>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      {% bootstrap_form create_visit_form %}
+      {% bootstrap_form upload_files_form %}
+      <input type="submit" value="Create Visit" class="btn btn-success" />
+    </form>
+{% endblock %}

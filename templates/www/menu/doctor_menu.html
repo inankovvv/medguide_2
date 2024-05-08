@@ -1,0 +1,25 @@
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Trials</a>
+  <ul class="dropdown-menu">
+    <li>
+      <a class="dropdown-item" href="{% url 'trial:view_all_trials' %}">All Trials</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{% url 'trial:enrolled_patients' %}">Enrolled Patients</a>
+    </li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Patients</a>
+  <ul class="dropdown-menu">
+    <li>
+      <a class="dropdown-item" href="{% url 'consent:create_consent' %}">New Consent</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{% url 'consent:view_all_consents' %}">All Consents</a>
+    </li>
+    <li>
+      <a class="dropdown-item" href="{% url 'consent:view_consented_patients' %}">Consented Patients</a>
+    </li>
+  </ul>
+</li>

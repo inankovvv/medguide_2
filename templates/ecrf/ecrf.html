@@ -1,0 +1,11 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'Patient eCRF' %}
+{% endblock %}
+{% block content %}
+    <h1>Patient's eCRF</h1>
+    <a href="{% url "ecrf:create_visit" ecrf_id=ecrf.id %}" class="btn btn-primary">Create New Visit</a>
+{% endblock %}

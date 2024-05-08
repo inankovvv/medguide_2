@@ -1,0 +1,20 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'View File' %}
+{% endblock %}
+{% block content %}
+  {% if file.name|file_extension in '.jpg, .jpeg, .png, .gif' %}
+    <img src="{{ file_url }}" alt="df" class="img-fluid" />
+  {% elif file.name|file_extension in '.mp4, .webm, .ogg' %}
+    <video class="w-100" height="700" controls>
+      <source src="{{ file_url }}" type="video/mp4" />
+    </video>
+  {% elif file.name|file_extension in '.pdf' %}
+    <div class="embed-responsive">
+      <embed src="{{ file_url }}#toolbar=0" type="application/pdf" width="100%" height="500px" />
+    </div>
+  {% endif %}
+{% endblock %}

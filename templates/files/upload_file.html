@@ -1,0 +1,17 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% load allauth i18n %}
+{% block title %}
+  {% trans 'Upload File' %}
+{% endblock %}
+{% block content %}
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% comment %} <div class="form-group mb-3">
+      <input type="file" name="files[]" class="form-control" multiple />
+    </div> {% endcomment %}
+    {% bootstrap_form file_upload_form %}
+    <input type="submit" value="Upload" class="btn btn-success" s />
+  </form>
+{% endblock %}

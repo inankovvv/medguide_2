@@ -1,0 +1,19 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load static %}
+{% load allauth i18n %}
+{% block title %}
+  {% trans 'Accept Trial Consent' %}
+{% endblock %}
+{% block content %}
+  <h1>Sign and Accept Trial Consent</h1>
+  <p>{{ trial_consent }}</p>
+  {% if not trial_consent.signed %}
+    <form method="POST">
+      {% csrf_token %}
+      <input type="submit" value="Sign and Accept" class="btn btn-success"/>
+    </form>
+  {% else %}
+    <p>Trial Consent signed!</p>
+  {% endif %}
+{% endblock %}

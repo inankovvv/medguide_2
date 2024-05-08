@@ -1,0 +1,46 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'All Consents' %}
+{% endblock %}
+{% block content %}
+  <h1>All Consents</h1>
+  {% if user.DoctorProfile %}
+    <p>
+      <a href="{% url 'consent:create_consent' %}" class="btn btn-success">Create New Consent</a>
+    </p>
+  {% endif %}
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover rounded">
+      <caption>All of your Consents</caption>
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Doctor</th>
+          <th scope="col">Patient</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for consent in consents %}
+          <tr>
+            <th scope="row">
+              <a href="{% url 'consent:view_consent' consent_id=consent.id %}">{{ consent.id }}</a>
+            </th>
+            <td>{{ consent.doctor }}</td>
+            <td>{{ consent.patient }}</td>
+            <td>
+              {% if consent.signed %}
+                <span class="text-success">Signed</span>
+              {% else %}
+                <span class="text-warning">Pending</span>
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

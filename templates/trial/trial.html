@@ -1,0 +1,18 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'New Consent' %}
+{% endblock %}
+{% block content %}
+    <h1>Trial Details</h1>
+    <p class="text-primary"><b>{{ trial }}</b></p>
+    <h3>Enroll a Patient</h3>
+    <form method="POST">
+      {% csrf_token %}
+      {% bootstrap_form enroll_patient_form %}
+      <input type="submit" value="Enroll Patient" class="btn btn-success" />
+    </form>
+    <div class="alert alert-info mt-3">If you are not seeing your patient here, please, check if you have created a consent for them.</div>
+{% endblock %}

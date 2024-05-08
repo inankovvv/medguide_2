@@ -1,0 +1,16 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% block title %}
+  Account Logout
+{% endblock %}
+{% block content %}
+  <h1>Logout</h1>
+  <p>
+    By clicking logout you will be logged out of <b>{{ request.user }}</b>
+  </p>
+  <p>Are you sure you want to logout?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger mb-3">Logout</button>
+  </form>
+{% endblock %}

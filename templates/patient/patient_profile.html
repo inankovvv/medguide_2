@@ -1,0 +1,47 @@
+{% extends 'www/base.html' %}
+{% block title %}
+  Patient Profile
+{% endblock %}
+{% block content %}
+  <h1>{{ patient_profile }}</h1>
+
+  <h3>Demographics</h3>
+  <div class="card mb-4">
+    <div class="card-header">Details</div>
+    <ul class="list-group list-group-flush">
+      {% for field, value in patient_profile.demographics.attrs %}
+        <li class="list-group-item">
+          <b>{{ field }}:</b> {{ value }}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <h3>Medical Conditions</h3>
+  <div class="card mb-4">
+    <div class="card-header">Details</div>
+    <ul class="list-group list-group-flush">
+      {% for condition in patient_profile.medical_conditions.all %}
+        {% for field, value in condition.attrs %}
+          <li class="list-group-item">
+            <b>{{ field }}:</b> {{ value }}
+          </li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <h3>Concomitant Medications</h3>
+  <div class="card">
+    <div class="card-header">Details</div>
+    <ul class="list-group list-group-flush">
+      {% for medication in patient_profile.concomitant_medications.all %}
+        {% for field, value in medication.attrs %}
+          <li class="list-group-item">
+            <b>{{ field }}:</b> {{ value }}
+          </li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

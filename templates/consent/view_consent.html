@@ -1,0 +1,27 @@
+{% extends 'www/base.html' %}
+{% load bootstrap5 %}
+{% load allauth i18n %}
+{% load files_tags %}
+{% block title %}
+  {% trans 'View Consent' %}
+{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <h1>Consent</h1>
+      <p class="text-primary"><b>{{ consent.id }}</b></p>
+      <p>Show this consent to your patient.</p>
+      <p>If they accept, their profile will be activated.</p>
+      <p>Please, call your patient and request they visit you and scan the QR code after logging in their account.</p>
+      {% if consent.signed %}
+        <p class="text-success">Consent has been signed</p>
+        <p><b>Signed by {{ consent.patient }}</b></p>
+      {% else %}
+        <p class="text-danger">Consent pending signing</p>
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      <img src="{{ qr_code_url }}" class="img img-thumbnail float-end" />
+    </div>
+  </div>
+{% endblock %}
