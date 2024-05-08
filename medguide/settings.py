@@ -186,8 +186,7 @@ MESSAGE_TAGS = {
 
 # Amazon Web Services S3 Bucket
 
-AWS_ACCESS_KEY_ID = 'AKIA4MTWL2WCVEL4PGME'
-AWS_SECRET_ACCESS_KEY = '2RrGEMLqxYJZlLN9tDNwzVa6GSl/zvkVyCJU9Fij'
+
 AWS_STORAGE_BUCKET_NAME = 'medguidebucket'
 AWS_S3_REGION_NAME = 'eu-central-1'  # e.g., us-east-1
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
